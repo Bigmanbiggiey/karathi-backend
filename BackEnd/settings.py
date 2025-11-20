@@ -122,7 +122,10 @@ WSGI_APPLICATION = 'BackEnd.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),  
+        default=os.environ.get(
+            "DATABASE_URL"
+            "postgres://postgres:0000@localhost:5433/KARATHI_GREENSCAPE_DB"
+        ),  
         conn_max_age=600,  
         ssl_require=True   
     )
