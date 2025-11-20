@@ -126,8 +126,7 @@ DATABASES = {
             "DATABASE_URL"
             "postgres://postgres:0000@localhost:5433/KARATHI_GREENSCAPE_DB"
         ),  
-        conn_max_age=600,  
-        ssl_require=True   
+        conn_max_age=600,    
     )
 }
 
