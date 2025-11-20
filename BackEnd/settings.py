@@ -13,7 +13,9 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
+load_dotenv()
 from rest_framework.settings import api_settings
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5s)^awpej@*#^)f_^1tp@a-n$g)2-ejv(!laz1%o7ndc*g2m$7'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
     ".railway.app",
-    "karathi-frontend-production.up",
+    "karathi-backend-production.up.railway.app",
 ]
 
 
@@ -119,14 +121,11 @@ WSGI_APPLICATION = 'BackEnd.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'KARATHI_GREENSCAPE_DB',
-        'USER': 'postgres',
-        'PASSWORD': '0000',
-        'HOST': 'localhost',
-        'PORT': '5433',
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),  
+        conn_max_age=600,  
+        ssl_require=True   
+    )
 }
 
 
@@ -165,6 +164,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -184,7 +185,6 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = "Auth.CustomUser"
 
-load_dotenv()
 
 # MPesa Sandbox / Production settings
 MPESA_CONSUMER_KEY = os.getenv("MPESA_CONSUMER_KEY")
@@ -224,3 +224,5 @@ LOGGING = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
