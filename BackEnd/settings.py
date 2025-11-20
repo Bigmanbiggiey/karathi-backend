@@ -126,7 +126,8 @@ DATABASES = {
             "DATABASE_URL"
             "postgres://postgres:0000@localhost:5433/KARATHI_GREENSCAPE_DB"
         ),  
-        conn_max_age=600,    
+        conn_max_age=600,
+        ssl_require=os.getenv("DATABASE_URL") is not None    
     )
 }
 
