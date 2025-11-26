@@ -79,7 +79,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://karathi-frontend-production.up.railway.app",
+    "https://karathi-greenscape-company.up.railway.app",
 ]
 CORS_ALLOW_HEADERS = ['*']
 CORS_ALLOW_METHODS = [
@@ -92,7 +92,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-   "https://karathi-frontend-production.up.railway.app",
+   "https://karathi-greenscape-company.up.railway.app",
    "https://*.railway.app",
 ]
 
